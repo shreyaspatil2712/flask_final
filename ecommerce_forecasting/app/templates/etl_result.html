@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ETL Result</title>
+</head>
+<body>
+    <h1>ETL Process Results</h1>
+    <h2>Validation Messages</h2>
+    <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    
+    <h2>Loaded Data</h2>
+    <div>{{ data|safe }}</div>
+</body>
+</html>

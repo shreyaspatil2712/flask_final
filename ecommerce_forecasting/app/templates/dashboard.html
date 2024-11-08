@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f5f5f5; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .title { text-align: center; margin-bottom: 20px; color: #333; }
+        .chart-container { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+        .chart { border: 1px solid #ccc; border-radius: 10px; padding: 15px; background-color: #fff; width: 45%; }
+        .chart img { max-width: 100%; height: auto; border-radius: 5px; }
+        h2 { font-size: 1.2rem; color: #555; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">
+            <h1>E-Commerce Dashboard</h1>
+        </div>
+        <div class="chart-container">
+            {% for title, img_data in plots.items() %}
+                <div class="chart">
+                    <h2>{{ title.replace('_', ' ').title() }}</h2>
+                    <img src="data:image/png;base64,{{ img_data }}" alt="{{ title }}">
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
