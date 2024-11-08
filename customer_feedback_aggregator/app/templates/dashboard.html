@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            padding: 20px;
+        }
+
+        p {
+            text-align: center;
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+
+        .chart-section {
+            margin-bottom: 40px;
+        }
+
+        .chart-section h3 {
+            color: #16a085;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .chart-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .chart-container div {
+            background-color: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart-container div h3 {
+            color: #34495e;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+            }
+            .chart-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h2>Dashboard</h2>
+    <p>Welcome, {{ current_user.role }}!</p>
+
+    <div class="container">
+        <div class="chart-container">
+            <div class="chart-section">
+                <h3>Sentiment Trend Over Time</h3>
+                {{ charts['sentiment_trend']|safe }}
+            </div>
+
+            {% if current_user.role == 'admin' or current_user.role == 'analyst' %}
+                <div class="chart-section">
+                    <h3>Average Sentiment by Source</h3>
+                    {{ charts['average_sentiment_by_source']|safe }}
+                </div>
+            {% endif %}
+
+            {% if current_user.role == 'admin' %}
+                <div class="chart-section">
+                    <h3>Feedback Source Distribution</h3>
+                    {{ charts['feedback_source_distribution']|safe }}
+                </div>
+                <div class="chart-section">
+                    <h3>Sentiment Score Distribution</h3>
+                    {{ charts['sentiment_distribution']|safe }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
